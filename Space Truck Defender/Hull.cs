@@ -71,16 +71,18 @@ namespace Space_Truck_Defender
         /* basic damage function. For each hit,
          * reduces health by (Damage-Armor). Negative
          * armor values increase damage.
+         * Note that damage methods cannot heal,
+         * so having excessive armor doesn't regenerate life
          */
 
         public void Damage(float d)
         {
-            CurrHP = CurrHP - (d - Armor);
+            CurrHP -= Math.Max((d - Armor), 0);
         }
 
         public void DamagePierce(float d)
         {
-            CurrHP = CurrHP - d;
+            CurrHP -= Math.Max(d,0);
         }
 
         public void ResetHP()

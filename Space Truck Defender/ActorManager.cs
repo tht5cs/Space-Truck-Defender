@@ -213,17 +213,17 @@ namespace Space_Truck_Defender
         private void UpdateAIList(GameTime gt)
         {
             int max = AIList.Count;
-            var list = AIList;
             for (int i = max - 1; i >= 0; i--)
             {
+                var ai = AIList[i];
                 //first, do trigger checks
-
-                //then, instantiate new states/ triggers
-
-                if (!list[i].IsDestroyed())
-                    list[i].Update(gt);
-                else
-                    list.RemoveAt(i);
+                if(ai.CheckTriggers())
+                {
+                    //triggerlist.addrange(ai.getactivetriggers)
+                } 
+                ai.Update(gt);
+                if (ai.IsDestroyed())
+                    AIList.RemoveAt(i);
             }
         }
 

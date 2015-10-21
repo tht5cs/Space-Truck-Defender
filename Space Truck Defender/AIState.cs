@@ -31,6 +31,15 @@ namespace Space_Truck_Defender
          * AI state. 
          */
 
+
+        public void Attach(Actor a)
+        {
+            Body = a;
+        }
+
+        //Note that AISTATES are never directly part of lists,
+        //and exist as fields of an AI. Thus, this will only
+        // ever be called by its AI parent.
         public override void Update(GameTime gt)
         {
             if (Moving)
@@ -74,6 +83,28 @@ namespace Space_Truck_Defender
         public void AddTrigger(AITrigger t)
         {
             TriggerList.Add(t);
+        }
+
+
+        /* Used for generating board copies of AIStates
+         */
+        public AIState Copy()
+        {
+            var retstate = new AIState();
+            retstate.Body = this.Body; // this is fine, as Copy() is only used for board copies.
+                                        // the data copy is guaranteed to have a body.
+            retstate.MoveTarget = this.MoveTarget;
+            retstate.ShootTarget = this.ShootTarget;
+            retstate.Shooting = this.Shooting;
+            retstate.Moving = this.Moving;
+            retstate.TriggerList = this.TriggerList; 
+            /* pass by reference ok for this as the AI will have 
+             * to make its own deep copies of the AITriggers to add
+             * to the board. This TriggerList is just so the AI can copy
+             * the correct triggers.
+             */
+
+            return retstate;
         }
 
     }

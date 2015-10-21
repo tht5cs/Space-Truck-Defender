@@ -20,6 +20,15 @@ namespace Space_Truck_Defender
         private Actor Body; // this is what the AI controls
         private AIState CurrentState;
 
+        /* Data constructor
+         */
+        public AI(AIState ai)
+        {
+            this.CurrentState = ai;
+        }
+
+        /* Board constructor
+         */
         public AI(Actor _body)
         {
             this.Body = _body;

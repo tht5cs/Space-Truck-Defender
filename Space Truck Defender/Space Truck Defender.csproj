@@ -39,9 +39,21 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Actor.cs" />
-    <Compile Include="AI.cs" />
-    <Compile Include="AIState.cs" />
-    <Compile Include="AITrigger.cs" />
+    <Compile Include="ActorManager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AI.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AIState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="AITrigger.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Collidable.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="CollisionManager.cs" />
     <Compile Include="Effect.cs" />
     <Compile Include="EffectDamage.cs" />
@@ -52,9 +64,7 @@
     <Compile Include="Hull.cs" />
     <Compile Include="IDrawable.cs" />
     <Compile Include="InputManager.cs" />
-    <Compile Include="Collidable.cs" />
     <Compile Include="Game1.cs" />
-    <Compile Include="ActorManager.cs" />
     <Compile Include="Piece.cs" />
     <Compile Include="PlayerControls.cs" />
     <Compile Include="Program.cs" />
@@ -77,6 +87,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Icon.ico" />
+    <Content Include="obj\x86\Debug\Space Truck Defender.csproj.FileListAbsolute.txt" />
+    <Content Include="obj\x86\Debug\Space Truck Defender.exe" />
+    <Content Include="obj\x86\Debug\Space Truck Defender.pdb" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="Content\Content.mgcb" />
@@ -85,6 +98,13 @@
     <Content Include="Content\JSM.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="obj\x86\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\x86\Debug\Space Truck Defender.csprojResolveAssemblyReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\x86\Debug\TempPE\" />
   </ItemGroup>
   <!-- Specify the search path explicitly so the ResolveAssemblyReferences task picks the right ones -->
   <Target Name="BeforeResolveReferences">

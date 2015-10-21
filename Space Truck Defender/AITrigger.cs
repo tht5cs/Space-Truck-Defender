@@ -31,5 +31,11 @@ namespace Space_Truck_Defender
         {
             return this.State;
         }
+
+        /* This is similar to a method in Effect. It returns
+         * a new, deep copy of the AITrigger. For use in making
+         * copies for the board.
+         */
+        public abstract AITrigger Copy();
     }
 }

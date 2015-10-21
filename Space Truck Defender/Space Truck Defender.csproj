@@ -42,7 +42,6 @@
     <Compile Include="AI.cs" />
     <Compile Include="AIState.cs" />
     <Compile Include="AITrigger.cs" />
-    <Compile Include="BadEffect.cs" />
     <Compile Include="CollisionManager.cs" />
     <Compile Include="Effect.cs" />
     <Compile Include="EffectDamage.cs" />
@@ -56,7 +55,6 @@
     <Compile Include="Collidable.cs" />
     <Compile Include="Game1.cs" />
     <Compile Include="ActorManager.cs" />
-    <Compile Include="MovementPattern.cs" />
     <Compile Include="Piece.cs" />
     <Compile Include="PlayerControls.cs" />
     <Compile Include="Program.cs" />

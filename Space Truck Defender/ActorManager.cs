@@ -185,7 +185,7 @@ namespace Space_Truck_Defender
             Collisions.CheckCollisions();
 
             //test code
-            if (EnemyCollidables.Count < 200)
+            if (EnemyCollidables.Count < 100)
                 NewEnemy();
         }
 

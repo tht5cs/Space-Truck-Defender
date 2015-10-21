@@ -24,7 +24,7 @@ namespace Space_Truck_Defender
         private bool IsGoing; // whether to stop or go
 
         //pattern stuff
-        private MovementPattern Pattern;
+        //private MovementPattern Pattern;
 
         /* Types of Engine:
          * 1: Fixed Heading
@@ -42,7 +42,7 @@ namespace Space_Truck_Defender
             Heading = 0;
             IsGoing = false;
             Velocity = new Vector2(0, 0);
-            Pattern = new MovementPattern();
+            //Pattern = new MovementPattern();
         }
 
         //copy constructor
@@ -53,7 +53,7 @@ namespace Space_Truck_Defender
             Heading = 0;
             IsGoing = false;
             Velocity = new Vector2(0, 0);
-            Pattern = new MovementPattern();
+            //Pattern = new MovementPattern();
         }
 
         public float GetSpeed()
@@ -89,7 +89,7 @@ namespace Space_Truck_Defender
         public void Update(GameTime gt)
         {
             UpdateVelocity(gt);
-            Pattern.Update(gt);
+            //Pattern.Update(gt);
         }
 
         //moves towards the direction determined by Heading
@@ -141,10 +141,10 @@ namespace Space_Truck_Defender
         }
 
         //this method returns the amount an actor has to move for the given timestep
-        public Vector2 GetOffset(GameTime gt)
+        public Vector2 GetOffset()
         {
-            Vector2 patternStep = Pattern.GetOffset(gt);
-            return Vector2.Add(Velocity, patternStep);
+            //Vector2 patternStep = Pattern.GetOffset(gt);
+            return this.Velocity;
         }
     }
 }

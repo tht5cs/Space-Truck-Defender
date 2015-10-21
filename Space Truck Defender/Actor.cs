@@ -158,7 +158,7 @@ namespace Space_Truck_Defender
         public void Move(GameTime gt)
         {
             engine.Update(gt);
-            Position = Vector2.Add(Position, engine.GetOffset(gt));
+            Position = Vector2.Add(Position, engine.GetOffset());
             Box.UpdatePosition(this.Position);
         }
 

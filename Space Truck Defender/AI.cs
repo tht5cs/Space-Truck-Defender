@@ -30,7 +30,7 @@ namespace Space_Truck_Defender
         public AI(AIState ai)
         {
             this.CurrentState = ai;
-            ActiveTriggers = ai.GetTriggers();
+            this.ActiveTriggers = ai.GetTriggers();
         }
 
         /* Board constructor. This Constructor
@@ -40,10 +40,10 @@ namespace Space_Truck_Defender
          */
         public AI(AI ai, Actor _body)
         {//IMP
-            CurrentState = ai.CurrentState.Copy();
-            Attach(_body);
-            ActiveTriggers = new List<AITrigger>();
-            ResetActiveTriggers();
+            this.CurrentState = ai.CurrentState.Copy();
+            this.Attach(_body);
+            this.ActiveTriggers = new List<AITrigger>();
+            this.ResetActiveTriggers();
         }
 
 
@@ -59,8 +59,7 @@ namespace Space_Truck_Defender
             
             if (!Body.IsDestroyed())
             {
-
-                //CurrentState.Update(gt);
+                CurrentState.Update(gt);
             }
             else
                 this.Destroy();
@@ -99,7 +98,7 @@ namespace Space_Truck_Defender
             // clean out the old list, and destroy
             //the triggers so other lists will do the same
             int max = ActiveTriggers.Count;
-            for (int i = max; i >= 0; i--)
+            for (int i = max-1; i >= 0; i--)
             {
                 ActiveTriggers[i].Destroy();
                 ActiveTriggers.RemoveAt(i);

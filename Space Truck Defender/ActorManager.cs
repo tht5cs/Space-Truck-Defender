@@ -112,7 +112,9 @@ namespace Space_Truck_Defender
             int ypos = r.Next(50, 400);
             Vector2 pos = new Vector2(xpos, ypos);
             Actor a = new Actor(Data.baseEnemyActor, pos);
+            AI ai = new AI(Data.baseAI, a);
             InsertCollidable(a);
+            AIList.Add(ai);
         }
 
         public void AddPlayer(PlayerControls p)
@@ -218,7 +220,7 @@ namespace Space_Truck_Defender
                     p.ResetRespawnTime();
                     Actor a = p.GetPlayer();
                     a.Revive();
-                    a.SetPosition(new Vector2(BorderWidth / 2, BorderHeight / 2));
+                    a.SetPosition(new Vector2(BorderWidth / 2, BorderHeight * 3 / 4));
                     InsertCollidable(a);
                 }                    
             }

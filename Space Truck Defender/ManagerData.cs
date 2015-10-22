@@ -33,6 +33,8 @@ namespace Space_Truck_Defender
         public EffectDestroy baseDestroy;
         public EffectDamage baseDamage;
 
+        public AI baseAI;
+
         //endDefaults
 
         public GraphicsDevice Device;
@@ -71,6 +73,16 @@ namespace Space_Truck_Defender
             for (int i = 0; i < 3; i++)
                 d.Add(0);
             baseWeapon1 = new Weapon(baseProjectile1, d, 0.075f, 0.12);
+
+            InitializeBaseAI();
+        }
+
+        /* AI that sets the actor to move and shoot
+         */
+        public void InitializeBaseAI()
+        {
+            AIState a = new AIState(true, false);
+            baseAI = new AI(a);
 
         }
 

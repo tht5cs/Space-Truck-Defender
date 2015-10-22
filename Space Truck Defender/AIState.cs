@@ -42,20 +42,24 @@ namespace Space_Truck_Defender
         public override void Update(GameTime gt)
         {
             if (Moving)
+            {
                 Body.Go();
                 if (MoveTarget != null)
                 {
                     Body.SetHeading(PointAt(MoveTarget));
                 }
+            }
             else
                 Body.Stop();
 
             if (Shooting)
+            {
                 Body.Shoot();
                 if (ShootTarget != null)
                 {
                     Body.SetWeaponHeadings(PointAt(ShootTarget));
                 }
+            }
             else
                 Body.HoldFire();
 
@@ -89,7 +93,7 @@ namespace Space_Truck_Defender
          */
         public AIState Copy()
         {
-            var retstate = new AIState(this.Moving, this.Shooting);
+            AIState retstate = new AIState(this.Moving, this.Shooting);
             retstate.Body = this.Body; // this is fine, as Copy() is only used for board copies.
                                         // the data copy is guaranteed to have a body.
             retstate.MoveTarget = this.MoveTarget;

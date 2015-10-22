@@ -14,26 +14,6 @@ namespace Space_Truck_Defender
      */
     public class ActorManager
     {
-        
-        //BEGIN DEFAULTS
-        Engine baseEngine1,
-                baseEngine2;
-        Actor baseFriendlyActor,
-                baseEnemyActor;
-        Actor baseProjectile1;
-        Weapon baseWeapon1;
-
-        Hull ProjectileHull,
-            ActorHull,
-            PlayerHull;
-
-        EffectDestroy baseDestroy;
-        EffectDamage baseDamage;
-
-        //END DEFAULTS
-
-
-
 
 
         //"connector" fields. links the actor manager to input
@@ -44,6 +24,9 @@ namespace Space_Truck_Defender
 
         private int BorderWidth,
                     BorderHeight;
+
+        //the thing that contains all of the data copies and whatnot
+        private ManagerData Data;
 
         private List<AI> AIList;
 
@@ -96,36 +79,7 @@ namespace Space_Truck_Defender
             BorderWidth = (gWidth + 2) / gWidth * Graphics.PreferredBackBufferWidth;
             BorderHeight = (gHeight + 2) / gHeight * Graphics.PreferredBackBufferHeight;
 
-            InitializeBases();
-        }
-
-        private void InitializeBases()
-        {
-            ActorHull = new Hull(75, 5, 2);
-            PlayerHull = new Hull(100, 5, 2);
-            ProjectileHull = new Hull(1, -1, 0);
-            
-            baseDestroy = new EffectDestroy();
-            baseDamage = new EffectDamage(20);
-            
-            baseEngine1 = new Engine(5, 50);
-            baseEngine2 = new Engine(10, 100);
-            Vector2 v = new Vector2(0,0);
-            baseFriendlyActor = new Actor(v, 10, baseEngine1, PlayerHull, Device);
-            //baseFriendlyActor.AddEffect(baseDestroy);
-            baseFriendlyActor.SetCollision(0);
-            baseEnemyActor = new Actor(v, 10, baseEngine1, ActorHull, Device);
-            baseEnemyActor.SetCollision(2);
-            //baseEnemyActor.AddEffect(baseDestroy);
-            baseProjectile1 = new Actor(v, 5, baseEngine2, ProjectileHull, Device);
-            baseProjectile1.AddEffect(baseDamage);
-            baseProjectile1.SetCollision(1);
-            //baseProjectile1.AddEffect(baseDestroy);
-            List<double> d = new List<double>();
-            for (int i = 0; i < 3 ; i++)
-                d.Add(0);
-            baseWeapon1 = new Weapon(baseProjectile1, d, 0.075f, 0.12);
-
+            Data = new ManagerData(Device);
         }
 
         public void SetFont(SpriteFont _font)
@@ -142,11 +96,11 @@ namespace Space_Truck_Defender
         //
         public void NewPlayer(Vector2 _position)
         {
-            Actor a = new Actor(baseFriendlyActor, _position);
-            AI ai = new AI(a);
-            a.AddWeapon(baseWeapon1);
+            Actor a = new Actor(Data.baseFriendlyActor, _position);
+            //AI ai = new AI(a);
+            a.AddWeapon(Data.baseWeapon1);
             PlayerControls p = new PlayerControls(a);
-            AIList.Add(ai);
+            //AIList.Add(ai);
             InsertCollidable(a);
             AddPlayer(p);
         }
@@ -157,7 +111,7 @@ namespace Space_Truck_Defender
             int xpos = r.Next(50, 400);
             int ypos = r.Next(50, 400);
             Vector2 pos = new Vector2(xpos, ypos);
-            Actor a = new Actor(baseEnemyActor, pos);
+            Actor a = new Actor(Data.baseEnemyActor, pos);
             InsertCollidable(a);
         }
 

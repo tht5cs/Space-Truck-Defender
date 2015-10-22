@@ -11,25 +11,24 @@ namespace Space_Truck_Defender
     public class AIState:Piece
     {
         private Actor Body;
-        private Target MoveTarget,
-                        ShootTarget;
-        private bool Moving, Shooting;
+        private Target MoveTarget = null,
+                        ShootTarget = null;
+        private bool Moving, 
+                    Shooting;
         //a list of events that could change the AI state
         private List<AITrigger> TriggerList;
-
-        public AIState()
-        {
-            TriggerList = new List<AITrigger>();
-        }
 
         /* Use this constructor for instantiating "data"
          * versions of the AI. These objects will not be
          * added to the board.
          */
+        public AIState(bool moving, bool shooting)
+        {
+            Moving = moving;
+            Shooting = shooting;
+            TriggerList = new List<AITrigger>();
+        }
 
-        /* Use this contructor for adding board copies of the
-         * AI state. 
-         */
 
 
         public void Attach(Actor a)
@@ -90,13 +89,11 @@ namespace Space_Truck_Defender
          */
         public AIState Copy()
         {
-            var retstate = new AIState();
+            var retstate = new AIState(this.Moving, this.Shooting);
             retstate.Body = this.Body; // this is fine, as Copy() is only used for board copies.
                                         // the data copy is guaranteed to have a body.
             retstate.MoveTarget = this.MoveTarget;
             retstate.ShootTarget = this.ShootTarget;
-            retstate.Shooting = this.Shooting;
-            retstate.Moving = this.Moving;
             retstate.TriggerList = this.TriggerList; 
             /* pass by reference ok for this as the AI will have 
              * to make its own deep copies of the AITriggers to add

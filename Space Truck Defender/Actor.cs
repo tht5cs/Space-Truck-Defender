@@ -369,6 +369,7 @@ namespace Space_Truck_Defender
         {
             base.Revive();
             ResetHP();
+            engine.Freeze();
         }
      }
 }

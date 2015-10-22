@@ -65,6 +65,7 @@
     <Compile Include="IDrawable.cs" />
     <Compile Include="InputManager.cs" />
     <Compile Include="Game1.cs" />
+    <Compile Include="ManagerData.cs" />
     <Compile Include="Piece.cs" />
     <Compile Include="PlayerControls.cs" />
     <Compile Include="Program.cs" />

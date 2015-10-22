@@ -86,6 +86,12 @@ namespace Space_Truck_Defender
             IsGoing = false;
         }
 
+        public void Freeze()
+        {
+            Velocity = new Vector2(0, 0);
+            Stop();
+        }
+
         public void Update(GameTime gt)
         {
             UpdateVelocity(gt);

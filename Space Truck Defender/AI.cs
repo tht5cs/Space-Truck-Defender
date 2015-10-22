@@ -28,9 +28,9 @@ namespace Space_Truck_Defender
         /* Data constructor
          */
         public AI(AIState ai)
-        {//IMP
+        {
             this.CurrentState = ai;
-            ActiveTriggers = new List<AITrigger>();
+            ActiveTriggers = ai.GetTriggers();
         }
 
         /* Board constructor. This Constructor
@@ -38,11 +38,14 @@ namespace Space_Truck_Defender
          * has one AI, though they may go through multiple states
          * and triggers.
          */
-        public AI(Actor _body)
+        public AI(AI ai, Actor _body)
         {//IMP
-            this.Body = _body;
+            CurrentState = ai.CurrentState.Copy();
+            Attach(_body);
             ActiveTriggers = new List<AITrigger>();
+            ResetActiveTriggers();
         }
+
 
         //point the AI unit at a given actor
         public void Attach (Actor a)

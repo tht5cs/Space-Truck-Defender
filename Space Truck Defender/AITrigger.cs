@@ -14,10 +14,15 @@ namespace Space_Truck_Defender
      */
     public abstract class AITrigger : Piece
     {
-        private bool Triggered = false;
-        private AIState State;
+        protected bool Triggered = false;
+        protected AIState State;
 
-        private void Trigger()
+        protected AITrigger(AIState _state)
+        {
+            this.State = _state;
+        }
+
+        protected void Trigger()
         {
             Triggered = true;
         }

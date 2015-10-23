@@ -20,7 +20,8 @@ namespace Space_Truck_Defender
         //Defaults
 
         public Engine baseEngine1,
-                    baseEngine2;
+                    baseEngine2,
+                    baseEngine3;
         public Actor baseFriendlyActor,
                     baseEnemyActor;
         public Actor baseProjectile1;
@@ -58,11 +59,12 @@ namespace Space_Truck_Defender
 
             baseEngine1 = new Engine(5, 50);
             baseEngine2 = new Engine(10, 100);
+            baseEngine3 = new Engine(2, 20);
             Vector2 v = new Vector2(0, 0);
             baseFriendlyActor = new Actor(v, 10, baseEngine1, PlayerHull, Device);
             //baseFriendlyActor.AddEffect(baseDestroy);
             baseFriendlyActor.SetCollision(0);
-            baseEnemyActor = new Actor(v, 10, baseEngine1, ActorHull, Device);
+            baseEnemyActor = new Actor(v, 10, baseEngine3, ActorHull, Device);
             baseEnemyActor.SetCollision(2);
             //baseEnemyActor.AddEffect(baseDestroy);
             baseProjectile1 = new Actor(v, 5, baseEngine2, ProjectileHull, Device);
@@ -81,8 +83,15 @@ namespace Space_Truck_Defender
          */
         public void InitializeBaseAI()
         {
-            AIState a = new AIState(true, false);
-            baseAI = new AI(a);
+            //first, the two basic states: move or stop
+            AIState move = new AIState(true, false);
+            AIState stop = new AIState(false, false);
+            //now, we connect them with the appropriate triggers
+            var t1 = new TriggerTime(stop, 0.25f);
+            var t2 = new TriggerTime(move, 0.25f);
+            move.AddTrigger(t1);
+            stop.AddTrigger(t2);
+            baseAI = new AI(move);
 
         }
 

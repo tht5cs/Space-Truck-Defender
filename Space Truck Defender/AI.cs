@@ -55,7 +55,7 @@ namespace Space_Truck_Defender
         }
 
         public override void Update(GameTime gt)
-        {//IMP
+        {
             
             if (!Body.IsDestroyed())
             {
@@ -76,15 +76,21 @@ namespace Space_Truck_Defender
         public bool CheckTriggers()
         {
             bool ret = false;
+            AITrigger newTrigger = null;
             foreach (var t in ActiveTriggers)
             {
                 if (t.IsTriggered())
                 {
                     ret = true;
-                    CurrentState = t.GetState().Copy();
-                    ResetActiveTriggers();
-
+                    newTrigger = t;
+                    break;
                 }
+            }
+            if (newTrigger != null)
+            {
+                CurrentState = newTrigger.GetState().Copy();
+                CurrentState.Attach(Body);
+                ResetActiveTriggers();
             }
             return ret;
         }

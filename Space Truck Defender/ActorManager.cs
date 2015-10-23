@@ -30,6 +30,9 @@ namespace Space_Truck_Defender
 
         private List<AI> AIList;
 
+        //A list of entitities that need to be updated, but don't quite fit elsewhere
+        private List<Piece> PieceList;
+
         /* A lot of collidables have a "CollisionSettings" field
          * that determines which collidable list it goes into. the 
          * mapping is as follows:
@@ -63,6 +66,7 @@ namespace Space_Truck_Defender
             this.Input = _input;
 
             AIList = new List<AI>();
+            PieceList = new List<Piece>();
 
             FriendlyCollidables = new List<Collidable>();
             FriendlyProjectiles = new List<Collidable>();
@@ -114,7 +118,18 @@ namespace Space_Truck_Defender
             Actor a = new Actor(Data.baseEnemyActor, pos);
             AI ai = new AI(Data.baseAI, a);
             InsertCollidable(a);
+            AddAI(ai);
+        }
+
+        /* Whenever an AI gets added, we need to make sure that
+         * their triggers and assorted addons are added as well.
+         * this method managed that.
+         */
+        private void AddAI(AI ai)
+        {
             AIList.Add(ai);
+            foreach (var t in ai.GetActiveTriggers())
+                PieceList.Add(t);
         }
 
         public void AddPlayer(PlayerControls p)
@@ -130,6 +145,7 @@ namespace Space_Truck_Defender
 
             UpdateAIList(gt);
 
+            UpdatePieceList(gt);
             //use the below for syntax help
             //Action<List<Collidable>> x = l => UpdateCollidableList(l, gt);
 
@@ -175,11 +191,22 @@ namespace Space_Truck_Defender
                 //first, do trigger checks
                 if(ai.CheckTriggers())
                 {
-                    //triggerlist.addrange(ai.getactivetriggers)
+                    PieceList.AddRange(ai.GetActiveTriggers());
                 } 
                 ai.Update(gt);
                 if (ai.IsDestroyed())
                     AIList.RemoveAt(i);
+            }
+        }
+
+        private void UpdatePieceList(GameTime gt)
+        {
+            int max = PieceList.Count;
+            for (int i = max-1; i >=0; i--)
+            {
+                PieceList[i].Update(gt);
+                if (PieceList[i].IsDestroyed())
+                    PieceList.RemoveAt(i);
             }
         }
 

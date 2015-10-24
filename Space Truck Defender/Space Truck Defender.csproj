@@ -54,6 +54,7 @@
     <Compile Include="Collidable.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CollisionCounter.cs" />
     <Compile Include="CollisionManager.cs" />
     <Compile Include="Effect.cs" />
     <Compile Include="EffectDamage.cs" />
@@ -71,6 +72,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Target.cs" />
+    <Compile Include="TriggerCollision.cs" />
     <Compile Include="TriggerTime.cs" />
     <Compile Include="Weapon.cs" />
   </ItemGroup>

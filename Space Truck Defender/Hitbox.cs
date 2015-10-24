@@ -36,7 +36,7 @@ namespace Space_Truck_Defender
         }
 
         //changes the position of the hitbox
-        public void UpdatePosition(Vector2 _Position)
+        public void SetPosition(Vector2 _Position)
         {
             this.Position = _Position;
         }

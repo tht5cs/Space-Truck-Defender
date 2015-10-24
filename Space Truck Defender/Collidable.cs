@@ -8,12 +8,13 @@ using Microsoft.Xna.Framework;
 
 namespace Space_Truck_Defender
 {
-    public class Collidable : Piece
+    public abstract class Collidable : Piece
     {
         protected Hitbox Box;
         protected Vector2 Position;
         protected int CollisionSetting;
         protected Dictionary<int, Effect> CollisionEffects;
+
 
 
         public Vector2 GetPosition()

@@ -159,7 +159,7 @@ namespace Space_Truck_Defender
         {
             engine.Update(gt);
             Position = Vector2.Add(Position, engine.GetOffset());
-            Box.UpdatePosition(this.Position);
+            Box.SetPosition(this.Position);
         }
 
         public double GetHeading()

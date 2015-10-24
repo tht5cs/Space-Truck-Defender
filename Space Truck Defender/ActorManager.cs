@@ -142,10 +142,6 @@ namespace Space_Truck_Defender
         {
             //this only updates inpt commands
             UpdateInput(gt);
-
-            UpdateAIList(gt);
-
-            UpdatePieceList(gt);
             //use the below for syntax help
             //Action<List<Collidable>> x = l => UpdateCollidableList(l, gt);
 
@@ -153,6 +149,10 @@ namespace Space_Truck_Defender
             UpdateCollidableList(FriendlyProjectiles, gt);
             UpdateCollidableList(EnemyCollidables, gt);
             UpdateCollidableList(EnemyProjectiles, gt);
+
+            UpdateAIList(gt);
+
+            UpdatePieceList(gt);
 
             Collisions.CheckCollisions();
 

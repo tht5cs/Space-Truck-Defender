@@ -22,10 +22,11 @@ namespace Space_Truck_Defender
         private int count = 0;
         private Actor lastActor = null;
         //Data constructor
-        public CollisionCounter(int radius, int collisionSetting, Vector2 pos, GraphicsDevice device)
+        public CollisionCounter(int radius, int collisionSetting, GraphicsDevice device)
         {
-            this.Box = new Hitbox(radius, collisionSetting, pos, device);
-            this.SetPosition(pos);
+            Vector2 temp = new Vector2(0, 0);// location doesn't matter, location will be updated when it hits the board.
+            this.CollisionSetting = collisionSetting;
+            this.Box = new Hitbox(radius, collisionSetting, temp, device);
             CollisionEffects = new Dictionary<int, Effect>();
         }
 
@@ -34,6 +35,7 @@ namespace Space_Truck_Defender
         {
             this.Box = new Hitbox(c.Box, pos);
             this.SetPosition(pos);
+            this.CollisionSetting = c.CollisionSetting;
             CollisionEffects = new Dictionary<int, Effect>();
         }
 
@@ -41,6 +43,10 @@ namespace Space_Truck_Defender
         public override void Update(GameTime gt)
         {
             Box.SetPosition(this.GetPosition());
+        }
+
+        public void ResetCount()
+        {
             this.count = 0;
         }
 

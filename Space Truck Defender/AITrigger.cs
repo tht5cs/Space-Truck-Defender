@@ -16,13 +16,14 @@ namespace Space_Truck_Defender
     {
         protected bool Triggered = false;
         protected AIState State;
+        protected Actor Body;
 
         protected AITrigger(AIState _state)
         {
             this.State = _state;
         }
 
-        protected void Trigger()
+        protected virtual void Trigger()
         {
             Triggered = true;
         }
@@ -35,6 +36,11 @@ namespace Space_Truck_Defender
         public AIState GetState()
         {
             return this.State;
+        }
+
+        public virtual void Attach(Actor a)
+        {
+            this.Body = a;
         }
 
         /* This is similar to a method in Effect. It returns

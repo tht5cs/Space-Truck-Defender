@@ -116,7 +116,7 @@ namespace Space_Truck_Defender
             int ypos = r.Next(50, 400);
             Vector2 pos = new Vector2(xpos, ypos);
             Actor a = new Actor(Data.baseEnemyActor, pos);
-            AI ai = new AI(Data.baseAI, a);
+            AI ai = new AI(Data.AICloseStop, a);
             InsertCollidable(a);
             AddAI(ai);
         }
@@ -128,8 +128,23 @@ namespace Space_Truck_Defender
         private void AddAI(AI ai)
         {
             AIList.Add(ai);
-            foreach (var t in ai.GetActiveTriggers())
-                PieceList.Add(t);
+            AddTriggers(ai);
+        }
+
+        //adds trigger  to the board, and attaches it to an actor
+        private void AddTriggers(AI ai)
+        {
+            foreach (AITrigger ait in ai.GetActiveTriggers())
+            {
+                ait.Attach(ai.GetBody());
+                if (ait is TriggerCollision)
+                {
+                    var tc = (TriggerCollision)ait;
+                    var cCounter = tc.GetCollisionCounter();
+                    InsertCollidable(cCounter);
+                }
+                PieceList.Add(ait);
+            }
         }
 
         public void AddPlayer(PlayerControls p)
@@ -150,14 +165,15 @@ namespace Space_Truck_Defender
             UpdateCollidableList(EnemyCollidables, gt);
             UpdateCollidableList(EnemyProjectiles, gt);
 
-            UpdateAIList(gt);
-
             UpdatePieceList(gt);
 
             Collisions.CheckCollisions();
 
+            UpdateAIList(gt);
+
+
             //test code
-            if (EnemyCollidables.Count < 100)
+            if (EnemyCollidables.Count < 50)
                 NewEnemy();
         }
 
@@ -191,7 +207,7 @@ namespace Space_Truck_Defender
                 //first, do trigger checks
                 if(ai.CheckTriggers())
                 {
-                    PieceList.AddRange(ai.GetActiveTriggers());
+                    AddTriggers(ai);
                 } 
                 ai.Update(gt);
                 if (ai.IsDestroyed())

@@ -60,10 +60,12 @@ namespace Space_Truck_Defender
             if (!Body.IsDestroyed())
             {
                 CurrentState.Update(gt);
+
             }
             else
                 this.Destroy();
         }
+
 
         /* This method runs before updating the AI
          * in the list. 
@@ -93,6 +95,13 @@ namespace Space_Truck_Defender
                 ResetActiveTriggers();
             }
             return ret;
+        }
+
+        public override void Destroy()
+        {
+ 	        base.Destroy();
+            foreach (AITrigger ait in ActiveTriggers)
+                ait.Destroy();
         }
 
         /* This method first destroys the current triggers, then
@@ -126,6 +135,11 @@ namespace Space_Truck_Defender
         public List<AITrigger> GetActiveTriggers()
         {
             return this.ActiveTriggers;
+        }
+
+        public Actor GetBody()
+        {
+            return this.Body;
         }
 
 

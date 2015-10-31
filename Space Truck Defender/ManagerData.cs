@@ -34,7 +34,8 @@ namespace Space_Truck_Defender
         public EffectDestroy baseDestroy;
         public EffectDamage baseDamage;
 
-        public AI baseAI;
+        public AI AIStartStop;
+        public AI AICloseStop;
 
         //endDefaults
 
@@ -76,12 +77,13 @@ namespace Space_Truck_Defender
                 d.Add(0);
             baseWeapon1 = new Weapon(baseProjectile1, d, 0.075f, 0.12);
 
-            InitializeBaseAI();
+            InitializeAIStartStop();
+            InitializeAICloseStop();
         }
 
         /* AI that sets the actor to move and shoot
          */
-        public void InitializeBaseAI()
+        public void InitializeAIStartStop()
         {
             //first, the two basic states: move or stop
             AIState move = new AIState(true, false);
@@ -91,8 +93,24 @@ namespace Space_Truck_Defender
             var t2 = new TriggerTime(move, 0.25f);
             move.AddTrigger(t1);
             stop.AddTrigger(t2);
-            baseAI = new AI(move);
+            AIStartStop = new AI(move);
 
+        }
+
+        /* AI For enemy actors. When a friendly (player)
+         * actor comes close, the actor will stop moving.
+         */
+        public void InitializeAICloseStop()
+        {
+            AIState move = new AIState(true, false);
+            AIState stop = new AIState(false, false);
+            CollisionCounter c = new CollisionCounter(30, 3, Device);//radius of 15, collides with Friendly Actors
+            var t1 = new TriggerCollision(stop, c, 0, false); // trips when more than 1 friendly actor in radius
+            var t2 = new TriggerCollision(move, c, 1, true); // trips when there are no friendly actors in radius
+            move.AddTrigger(t1);
+            stop.AddTrigger(t2);
+            AICloseStop = new AI(move);
+            
         }
 
     }

@@ -165,10 +165,10 @@ namespace Space_Truck_Defender
             UpdateCollidableList(EnemyCollidables, gt);
             UpdateCollidableList(EnemyProjectiles, gt);
 
-            UpdatePieceList(gt);
+
 
             Collisions.CheckCollisions();
-
+            UpdatePieceList(gt);
             UpdateAIList(gt);
 
 
@@ -204,12 +204,13 @@ namespace Space_Truck_Defender
             for (int i = max - 1; i >= 0; i--)
             {
                 var ai = AIList[i];
+                ai.Update(gt);
                 //first, do trigger checks
                 if(ai.CheckTriggers())
                 {
                     AddTriggers(ai);
                 } 
-                ai.Update(gt);
+
                 if (ai.IsDestroyed())
                     AIList.RemoveAt(i);
             }

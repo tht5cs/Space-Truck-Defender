@@ -116,7 +116,7 @@ namespace Space_Truck_Defender
             int ypos = r.Next(50, 400);
             Vector2 pos = new Vector2(xpos, ypos);
             Actor a = new Actor(Data.baseEnemyActor, pos);
-            AI ai = new AI(Data.AICloseStop, a);
+            AI ai = new AI(Data.AIHoming, a);
             InsertCollidable(a);
             AddAI(ai);
         }

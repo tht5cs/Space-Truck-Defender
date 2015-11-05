@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework;
 
 namespace Space_Truck_Defender
 {
-    abstract class Target
+    public abstract class Target : Piece
     {
 
         abstract public Vector2 GetPosition();

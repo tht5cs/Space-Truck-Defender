@@ -46,7 +46,10 @@ namespace Space_Truck_Defender
                 Body.Go();
                 if (MoveTarget != null)
                 {
-                    Body.SetHeading(PointAt(MoveTarget));
+                    if (!MoveTarget.IsDestroyed())
+                        Body.SetHeading(PointAt(MoveTarget));
+                    else
+                        MoveTarget = null;
                 }
             }
             else
@@ -57,7 +60,10 @@ namespace Space_Truck_Defender
                 Body.Shoot();
                 if (ShootTarget != null)
                 {
-                    Body.SetWeaponHeadings(PointAt(ShootTarget));
+                    if (!ShootTarget.IsDestroyed())
+                        Body.SetWeaponHeadings(PointAt(ShootTarget));
+                    else
+                        ShootTarget = null;
                 }
             }
             else
@@ -74,8 +80,20 @@ namespace Space_Truck_Defender
         {
             var tp = t.GetPosition();
             var bp = Body.GetPosition();
-            double dir = Math.Atan2(tp.X - bp.X, tp.Y - bp.Y);
+            double dir = Math.Atan2(tp.Y - bp.Y, tp.X - bp.X);
             return dir;
+        }
+
+        public void SetMoveTarget(Target t)
+        {
+            if (MoveTarget == null)
+                MoveTarget = t;
+        }
+
+        public void SetShootTarget(Target t)
+        {
+            if (ShootTarget == null)
+                ShootTarget = t;
         }
 
         public List<AITrigger> GetTriggers()

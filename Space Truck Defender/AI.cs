@@ -92,6 +92,8 @@ namespace Space_Truck_Defender
             {
                 CurrentState = newTrigger.GetState().Copy();
                 CurrentState.Attach(Body);
+                CurrentState.SetMoveTarget(newTrigger.GetMoveTarget());
+                CurrentState.SetShootTarget(newTrigger.GetShootTarget());
                 ResetActiveTriggers();
             }
             return ret;

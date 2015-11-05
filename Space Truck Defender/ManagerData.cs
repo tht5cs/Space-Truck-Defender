@@ -36,6 +36,7 @@ namespace Space_Truck_Defender
 
         public AI AIStartStop;
         public AI AICloseStop;
+        public AI AIHoming;
 
         //endDefaults
 
@@ -79,6 +80,7 @@ namespace Space_Truck_Defender
 
             InitializeAIStartStop();
             InitializeAICloseStop();
+            InitializeAIHoming();
         }
 
         /* AI that sets the actor to move and shoot
@@ -111,6 +113,16 @@ namespace Space_Truck_Defender
             stop.AddTrigger(t2);
             AICloseStop = new AI(move);
             
+        }
+
+        public void InitializeAIHoming()
+        {
+            AIState move = new AIState(true, false);
+            AIState home = new AIState(true, true);
+            CollisionCounter c = new CollisionCounter(40, 3, Device);
+            var t1 = new TriggerCollision(home, c, 0, false);
+            move.AddTrigger(t1);
+            AIHoming = new AI(move);
         }
 
     }

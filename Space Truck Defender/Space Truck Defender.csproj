@@ -72,6 +72,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Target.cs" />
+    <Compile Include="TargetActor.cs" />
     <Compile Include="TriggerCollision.cs" />
     <Compile Include="TriggerTime.cs" />
     <Compile Include="Weapon.cs" />

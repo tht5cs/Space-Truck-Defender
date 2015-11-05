@@ -55,6 +55,11 @@ namespace Space_Truck_Defender
             return new TriggerCollision(State, new CollisionCounter(cCounter, cCounter.GetPosition()), this.triggerCount, this.LessThan);
         }
 
+        public override Target GetMoveTarget()
+        {
+            return new TargetActor(cCounter.GetLastActor());
+        }
+
         public CollisionCounter GetCollisionCounter()
         {
             return this.cCounter;

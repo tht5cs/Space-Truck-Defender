@@ -43,6 +43,16 @@ namespace Space_Truck_Defender
             this.Body = a;
         }
 
+        //
+        public virtual Target GetMoveTarget()
+        {
+            return null;
+        }
+        public virtual Target GetShootTarget()
+        {
+            return null;
+        }
+
         /* This is similar to a method in Effect. It returns
          * a new, deep copy of the AITrigger. For use in making
          * copies for the board.
